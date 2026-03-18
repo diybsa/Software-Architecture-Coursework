@@ -1,0 +1,224 @@
+# Software Architecture Coursework – Sprint 2 Report
+
+## 1. Introduction
+
+This sprint focuses on deriving a software architecture from the requirements defined in Sprint 1. The system developed is a **Share Data Retrieval System**, which allows users to request historical share price data within a specified date range.
+
+The architecture follows **Clean Architecture principles**, ensuring separation of concerns, maintainability, and scalability.
+
+---
+
+# 2. Business Concept Model
+
+![Image](https://www.visual-paradigm.com/VPGallery/img/datamodeling/EntityRelationshipDiagram/Entity-Relationship-Diagram-Sample.png)
+
+![Image](https://www.freeprojectz.com/sites/default/files/Stock%20Management%20System_0.jpeg)
+
+![Image](https://images.squarespace-cdn.com/content/v1/50c9c50fe4b0a97682fac903/1363727323947-GIDJVZ7P5RAFNI3DY70H/ERD1.jpg)
+
+![Image](https://img1.wsimg.com/isteam/ip/b3ef487a-bb7d-4838-ae40-9009930b7646/entity-relationship-diagram.png/%3A/rs%3Dw%3A1280)
+
+### Description
+
+The business concept model identifies the core entities and their relationships:
+
+* **User**: Initiates requests for share data
+* **Share**: Represents a financial asset
+* **PriceData**: Contains historical pricing information
+* **MarketDataProvider**: External system providing share data
+
+### Relationships:
+
+* A **User** requests a **Share**
+* A **Share** contains multiple **PriceData** entries
+* The system interacts with a **MarketDataProvider** to retrieve data
+
+---
+
+# 3. Use Case Model
+
+![Image](https://www.uml-diagrams.org/use-case-diagrams/use-case-diagram-elements.png)
+
+![Image](https://www.visual-paradigm.com/servlet/editor-content/guide/uml-unified-modeling-language/types-of-actor-in-use-case-model/sites/7/2019/09/use-case-diagram-banking-system-example.png)
+
+![Image](https://d2slcw3kip6qmk.cloudfront.net/marketing/pages/chart/what-is-a-use-case-diagram-in-UML/UML_use_case_example-800x707.PNG)
+
+![Image](https://www.dragon1.com/images/uml-use-case-diagram-example.jpg)
+
+### Use Case: Get Share Data
+
+**Actor:** User
+
+### Steps:
+
+1. User enters share symbol
+2. User selects a date range
+3. System validates the input
+4. System retrieves share data from external provider
+5. System stores the data
+6. System returns the result
+
+### System Operations:
+
+* `execute(symbol, start, end)`
+* `fetchShareData()`
+* `save()`
+
+---
+
+# 4. System Interfaces
+
+### Defined Interfaces:
+
+* **MarketDataProvider**
+
+  * Responsible for fetching share data from external sources
+
+* **ShareRepository**
+
+  * Responsible for storing and retrieving share data
+
+### Description:
+
+These interfaces decouple the application logic from external systems, allowing flexibility and easier testing.
+
+---
+
+# 5. Business Type Model
+
+![Image](https://www.cs.virginia.edu/~horton/cs494/hw/hw2-class1.gif)
+
+![Image](https://www.uml-diagrams.org/class-diagrams/class-diagram-domain-overview.png)
+
+![Image](https://substackcdn.com/image/fetch/%24s_%21lMAf%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F72d3654b-44b5-4708-a634-527534bd0937_3772x3040.png)
+
+![Image](https://cdn-images.visual-paradigm.com/guide/uml/uml-class-diagram-tutorial/18-uml-class-diagram-example-gui.png)
+
+### Classes:
+
+**Share**
+
+* symbol
+* priceHistory (List of PriceData)
+
+**PriceData**
+
+* date
+* closePrice
+
+### Description:
+
+The business type model refines the conceptual model by introducing attributes and relationships between entities.
+
+---
+
+# 6. Initial System Architecture
+
+![Image](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
+
+![Image](https://res.cloudinary.com/jerrick/image/upload/v1706623537/65b90231280314001d8f99be.png)
+
+![Image](https://images.openai.com/static-rsc-3/Se9NgVNz8G5cOy_v0pu9CXa-J-Fm84UAS-y_FW6bYPzCQQEg3rncOvNkrmb2kobAwej4yJXXVg4T7rY9vfcWkl-xDODu0nHR3Re_6JdVpYw?purpose=fullsize\&v=1)
+
+![Image](https://images.openai.com/static-rsc-3/IAgGIBQ92Mw06Ud6IEN4kjQcQiEHAEl9qoL3jxwTQbQQdySUoYQAfL3eFY8dKrqJviYyLwzStKqneEhqIc0XuLIYjBnnJXd6E5Mf8wVB24g?purpose=fullsize\&v=1)
+
+### Layers:
+
+1. **Presentation Layer**
+
+   * ShareController
+   * Handles user input
+
+2. **Application Layer**
+
+   * GetShareDataUseCase
+   * Contains business logic
+
+3. **Domain Layer**
+
+   * Share, PriceData
+   * Core business entities
+
+4. **Infrastructure Layer**
+
+   * MarketDataProvider
+   * ShareRepository
+
+### Interface Allocation:
+
+* **GetShareDataUseCase** implements multiple interfaces (MarketDataProvider, ShareRepository)
+* **ShareController** interacts with only one interface (use case)
+
+---
+
+# 7. Business Interfaces & Collaboration
+
+![Image](https://www.researchgate.net/publication/334451053/figure/fig1/AS%3A780430768885760%401563080603618/Use-Case-Diagram-Figure-2-3-and-4-shows-examples-of-the-sequence-diagrams-that-have-been.ppm)
+
+![Image](https://user-images.githubusercontent.com/782127/75702680-216ce300-5c73-11ea-9187-ec656192ad3b.png)
+
+![Image](https://images.wondershare.com/edrawmax/templates/collaboration-diagram-for-inventory-management-system.png)
+
+![Image](https://images.wondershare.com/edrawmax/article2023/collaboration-diagram/collaboration-diagram-buy-ticket.jpg)
+
+### Interaction Flow:
+
+1. User sends request to ShareController
+2. ShareController calls GetShareDataUseCase
+3. Use case calls MarketDataProvider to fetch data
+4. Use case calls ShareRepository to store data
+5. Result is returned to the user
+
+---
+
+# 8. Clean Architecture Implementation
+
+### Principles Applied:
+
+* **Separation of Concerns**
+
+  * Each layer has a distinct responsibility
+
+* **Dependency Rule**
+
+  * Dependencies point inward toward the domain
+
+* **Interface Abstraction**
+
+  * External systems are accessed via interfaces
+
+* **Testability**
+
+  * Components can be tested independently
+
+---
+
+### Code Structure:
+
+```
+com.Ga3
+ ├── domain
+ ├── usecases
+ ├── infrastructure
+ └── presentation
+```
+
+---
+
+### Description:
+
+The system is structured to ensure that high-level business logic is independent of frameworks and external systems. The use case layer encapsulates application-specific rules, while infrastructure concerns are isolated.
+
+---
+
+# 9. Conclusion
+
+The developed architecture successfully transforms the requirements into a structured system using Clean Architecture principles.
+
+The design ensures:
+
+* Maintainability
+* Scalability
+* Clear separation between components
+
+All models and implementation are aligned, providing a cohesive and robust system design.
