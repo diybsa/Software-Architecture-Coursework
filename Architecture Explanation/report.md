@@ -10,7 +10,7 @@ The architecture follows **Clean Architecture principles**, ensuring separation 
 
 ## 2. Business Concept Model
 
-![Business Concept Model](docs/diagrams/business-concept.png)
+![Business Concept](https://raw.githubusercontent.com/diybsa/Software-Architecture-Coursework/main/docs/diagrams/business-concept.png)
 
 ### Description
 
@@ -31,7 +31,7 @@ The business concept model identifies the core entities in the system:
 
 ## 3. Use Case Model
 
-![Use Case Diagram](docs/diagrams/use-case.png)
+![Use Case](https://raw.githubusercontent.com/diybsa/Software-Architecture-Coursework/main/docs/diagrams/use-case.png)
 
 ### Main Actor
 - **User**
@@ -81,7 +81,7 @@ These interfaces allow the application layer to remain independent of specific i
 
 ## 5. Business Type Model
 
-![Class Diagram](docs/diagrams/class-diagram.png)
+![Use Case](https://raw.githubusercontent.com/diybsa/Software-Architecture-Coursework/main/docs/diagrams/use-case.png)
 
 ### Classes
 
@@ -101,7 +101,7 @@ The business type model defines the domain entities used in the system. A **Shar
 
 ## 6. Initial System Architecture
 
-![System Architecture](docs/diagrams/architecture-diagram.png)
+![Sequence Diagram](https://raw.githubusercontent.com/diybsa/Software-Architecture-Coursework/main/docs/diagrams/sequence-diagram.png)
 
 ### Layers
 
@@ -137,7 +137,7 @@ This demonstrates the **Dependency Inversion Principle**, where the application 
 
 ## 7. Business Interfaces and Collaboration
 
-![Sequence Diagram](docs/diagrams/sequence-diagram.png)
+![Architecture](https://raw.githubusercontent.com/diybsa/Software-Architecture-Coursework/main/docs/diagrams/%20architecture-diagram.png)
 
 ### Interaction Flow
 
