@@ -2,198 +2,157 @@
 
 ## 1. Introduction
 
-This sprint focuses on deriving a software architecture from the requirements defined in Sprint 1. The system developed is a **Share Data Retrieval System**, which allows users to request historical share price data within a specified date range.
+This sprint focuses on deriving a software architecture from the requirements defined in Sprint 1. The system developed is a **Share Price Comparison Application**, which allows users to retrieve historical share price data within a specified date range, store the data locally, and support comparison and charting.
 
-The architecture follows **Clean Architecture principles**, ensuring separation of concerns, maintainability, and scalability.
+The architecture follows **Clean Architecture principles**, ensuring separation of concerns, maintainability, scalability, and testability.
 
 ---
 
-# 2. Business Concept Model
+## 2. Business Concept Model
 
-![Image](https://www.visual-paradigm.com/VPGallery/img/datamodeling/EntityRelationshipDiagram/Entity-Relationship-Diagram-Sample.png)
-
-![Image](https://www.freeprojectz.com/sites/default/files/Stock%20Management%20System_0.jpeg)
-
-![Image](https://images.squarespace-cdn.com/content/v1/50c9c50fe4b0a97682fac903/1363727323947-GIDJVZ7P5RAFNI3DY70H/ERD1.jpg)
-
-![Image](https://img1.wsimg.com/isteam/ip/b3ef487a-bb7d-4838-ae40-9009930b7646/entity-relationship-diagram.png/%3A/rs%3Dw%3A1280)
+![Business Concept Model](docs/diagrams/business-concept.png)
 
 ### Description
 
-The business concept model identifies the core entities and their relationships:
+The business concept model identifies the core entities in the system:
 
-* **User**: Initiates requests for share data
-* **Share**: Represents a financial asset
-* **PriceData**: Contains historical pricing information
-* **MarketDataProvider**: External system providing share data
+- **User**: Initiates requests for share data  
+- **Share**: Represents a financial asset identified by a symbol  
+- **PriceData**: Represents daily price information for a share  
+- **MarketDataProvider**: External system used to retrieve share data  
 
-### Relationships:
+### Relationships
 
-* A **User** requests a **Share**
-* A **Share** contains multiple **PriceData** entries
-* The system interacts with a **MarketDataProvider** to retrieve data
+- A **User** requests data for a **Share**  
+- A **Share** contains multiple **PriceData** records  
+- The system retrieves data from a **MarketDataProvider**  
 
 ---
 
-# 3. Use Case Model
+## 3. Use Case Model
 
-![Image](https://www.uml-diagrams.org/use-case-diagrams/use-case-diagram-elements.png)
+![Use Case Diagram](docs/diagrams/use-case.png)
 
-![Image](https://www.visual-paradigm.com/servlet/editor-content/guide/uml-unified-modeling-language/types-of-actor-in-use-case-model/sites/7/2019/09/use-case-diagram-banking-system-example.png)
+### Main Actor
+- **User**
 
-![Image](https://d2slcw3kip6qmk.cloudfront.net/marketing/pages/chart/what-is-a-use-case-diagram-in-UML/UML_use_case_example-800x707.PNG)
-
-![Image](https://www.dragon1.com/images/uml-use-case-diagram-example.jpg)
+### Use Cases
+- Get Share Data  
+- Compare Two Shares  
+- View Share Chart  
 
 ### Use Case: Get Share Data
 
-**Actor:** User
-
-### Steps:
-
-1. User enters share symbol
-2. User selects a date range
-3. System validates the input
-4. System retrieves share data from external provider
-5. System stores the data
-6. System returns the result
-
-### System Operations:
-
-* `execute(symbol, start, end)`
-* `fetchShareData()`
-* `save()`
+1. User enters a share symbol  
+2. User selects a date range  
+3. System validates the input  
+4. System retrieves share data from the market data provider  
+5. System stores the data locally  
+6. System returns the data to the user  
 
 ---
 
-# 4. System Interfaces
+## 4. System Interfaces
 
-### Defined Interfaces:
+The system uses interfaces to decouple business logic from infrastructure components.
 
-* **MarketDataProvider**
+### MarketDataProvider
+- Responsible for retrieving share data from external sources  
 
-  * Responsible for fetching share data from external sources
-
-* **ShareRepository**
-
-  * Responsible for storing and retrieving share data
-
-### Description:
-
-These interfaces decouple the application logic from external systems, allowing flexibility and easier testing.
+**Operation:**
+- `fetchShareData(String symbol, LocalDate start, LocalDate end): Share`
 
 ---
 
-# 5. Business Type Model
+### ShareRepository
+- Responsible for storing and retrieving share data  
 
-![Image](https://www.cs.virginia.edu/~horton/cs494/hw/hw2-class1.gif)
+**Operations:**
+- `save(Share share): void`  
+- `findBySymbol(String symbol): Share`  
 
-![Image](https://www.uml-diagrams.org/class-diagrams/class-diagram-domain-overview.png)
+---
 
-![Image](https://substackcdn.com/image/fetch/%24s_%21lMAf%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F72d3654b-44b5-4708-a634-527534bd0937_3772x3040.png)
+### Description
 
-![Image](https://cdn-images.visual-paradigm.com/guide/uml/uml-class-diagram-tutorial/18-uml-class-diagram-example-gui.png)
+These interfaces allow the application layer to remain independent of specific implementations, improving flexibility and enabling easier testing.
 
-### Classes:
+---
+
+## 5. Business Type Model
+
+![Class Diagram](docs/diagrams/class-diagram.png)
+
+### Classes
 
 **Share**
-
-* symbol
-* priceHistory (List of PriceData)
+- symbol : String  
+- priceHistory : List<PriceData>  
 
 **PriceData**
+- date : LocalDate  
+- closePrice : double  
 
-* date
-* closePrice
+### Description
 
-### Description:
-
-The business type model refines the conceptual model by introducing attributes and relationships between entities.
+The business type model defines the domain entities used in the system. A **Share** aggregates multiple **PriceData** objects to represent historical price information.
 
 ---
 
-# 6. Initial System Architecture
+## 6. Initial System Architecture
 
-![Image](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
+![System Architecture](docs/diagrams/architecture-diagram.png)
 
-![Image](https://res.cloudinary.com/jerrick/image/upload/v1706623537/65b90231280314001d8f99be.png)
-
-![Image](https://images.openai.com/static-rsc-3/Se9NgVNz8G5cOy_v0pu9CXa-J-Fm84UAS-y_FW6bYPzCQQEg3rncOvNkrmb2kobAwej4yJXXVg4T7rY9vfcWkl-xDODu0nHR3Re_6JdVpYw?purpose=fullsize\&v=1)
-
-![Image](https://images.openai.com/static-rsc-3/IAgGIBQ92Mw06Ud6IEN4kjQcQiEHAEl9qoL3jxwTQbQQdySUoYQAfL3eFY8dKrqJviYyLwzStKqneEhqIc0XuLIYjBnnJXd6E5Mf8wVB24g?purpose=fullsize\&v=1)
-
-### Layers:
+### Layers
 
 1. **Presentation Layer**
-
-   * ShareController
-   * Handles user input
+   - ShareController  
+   - Handles user input and forwards requests  
 
 2. **Application Layer**
-
-   * GetShareDataUseCase
-   * Contains business logic
+   - ShareService  
+   - Contains application logic and coordinates operations  
 
 3. **Domain Layer**
-
-   * Share, PriceData
-   * Core business entities
+   - Share  
+   - PriceData  
+   - Core business entities  
 
 4. **Infrastructure Layer**
-
-   * MarketDataProvider
-   * ShareRepository
-
-### Interface Allocation:
-
-* **GetShareDataUseCase** implements multiple interfaces (MarketDataProvider, ShareRepository)
-* **ShareController** interacts with only one interface (use case)
+   - MarketDataProvider  
+   - ShareRepository  
+   - Handles external data access and persistence  
 
 ---
 
-# 7. Business Interfaces & Collaboration
+### Interface Allocation
 
-![Image](https://www.researchgate.net/publication/334451053/figure/fig1/AS%3A780430768885760%401563080603618/Use-Case-Diagram-Figure-2-3-and-4-shows-examples-of-the-sequence-diagrams-that-have-been.ppm)
+- **ShareController** depends on **ShareService**  
+- **ShareService** depends on **MarketDataProvider** and **ShareRepository** interfaces  
+- Infrastructure components provide implementations of these interfaces  
 
-![Image](https://user-images.githubusercontent.com/782127/75702680-216ce300-5c73-11ea-9187-ec656192ad3b.png)
-
-![Image](https://images.wondershare.com/edrawmax/templates/collaboration-diagram-for-inventory-management-system.png)
-
-![Image](https://images.wondershare.com/edrawmax/article2023/collaboration-diagram/collaboration-diagram-buy-ticket.jpg)
-
-### Interaction Flow:
-
-1. User sends request to ShareController
-2. ShareController calls GetShareDataUseCase
-3. Use case calls MarketDataProvider to fetch data
-4. Use case calls ShareRepository to store data
-5. Result is returned to the user
+This demonstrates the **Dependency Inversion Principle**, where the application layer depends on abstractions rather than concrete implementations.
 
 ---
 
-# 8. Clean Architecture Implementation
+## 7. Business Interfaces and Collaboration
 
-### Principles Applied:
+![Sequence Diagram](docs/diagrams/sequence-diagram.png)
 
-* **Separation of Concerns**
+### Interaction Flow
 
-  * Each layer has a distinct responsibility
-
-* **Dependency Rule**
-
-  * Dependencies point inward toward the domain
-
-* **Interface Abstraction**
-
-  * External systems are accessed via interfaces
-
-* **Testability**
-
-  * Components can be tested independently
+1. User sends a request to ShareController  
+2. ShareController calls ShareService  
+3. ShareService validates input  
+4. ShareService calls MarketDataProvider to fetch data  
+5. ShareService calls ShareRepository to store data  
+6. Data is returned to the controller and then to the user  
 
 ---
 
-### Code Structure:
+## 8. Clean Architecture Implementation
+
+### Package Structure
 
 ```
 com.Ga3
