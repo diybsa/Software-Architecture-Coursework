@@ -4,6 +4,6 @@
 - Requirements & documentation
 - Infrastructure (Repository, Provider)
 
-##Member B
+## Member B
 - Domain model (Share, PriceData)  
 - Application logic (ShareService)  
