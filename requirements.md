@@ -1,19 +1,26 @@
-Functional Requirements:
+# Requirements
 
-Get daily share prices for a symbol between two dates
-Compare prices of up to 2 companies
-Display charts
-Store data offline (JSON or SQLite)
+## Functional Requirements
+- The system shall retrieve daily share price data for a given symbol.
+- The system shall allow users to select a date range (max 2 years).
+- The system shall store retrieved data locally.
+- The system shall display share price charts.
+- The system shall allow comparison of two shares.
 
-Non-Functional Requirements:
+## Non-Functional Requirements
+- The system should work offline using stored data.
+- The system should be modular and maintainable.
+- The system should follow Clean Architecture principles.
+- The system should respond quickly to user requests.
 
-Works offline
-Handles 2 years of data
-Fast chart rendering
-Clean code and modular design
+## Scope
+Included:
+- Share data retrieval
+- Data storage
+- Data comparison
+- Chart display
 
-Scope:
-
-You will: chart, compare, store data
-
-You won’t: fancy UI, predictive analytics, multi-user accounts
+Not Included:
+- User accounts
+- Advanced UI design
+- Machine learning predictions
