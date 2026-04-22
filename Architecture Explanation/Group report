@@ -1,0 +1,58 @@
+Group Report
+1. Introduction
+
+This project was completed over three sprints to design and implement a software system using architectural principles. The aim was to move from requirements to a working system while applying good design practices such as modularity, scalability, and clean architecture.
+
+2. Sprint 1 – Requirements and Setup
+
+In Sprint 1, we identified the system requirements and defined the project scope. These included both functional and non-functional requirements to ensure the system meets user needs.
+
+We also set up the development environment using GitHub, created branches, and organized tasks using a project management tool. A Code of Conduct was agreed to ensure effective teamwork.
+
+An initial component diagram was created to represent the system structure, and basic architectural elements were implemented in Java using abstract classes and interfaces.
+
+3. Sprint 2 – Architecture Design
+
+In Sprint 2, we developed the system architecture from the requirements.
+
+We created:
+
+A Business Concept Model to understand the domain
+A Use Case Diagram to represent user interactions
+System Interfaces to define system operations
+A Business Type Model to structure key entities
+
+These were combined into an initial system architecture, showing how components interact.
+
+We applied Clean Architecture to separate concerns and improve maintainability. The system was implemented based on this structure using well-defined components and interfaces.
+
+4. Sprint 3 – Implementation and Testing
+
+In Sprint 3, we enhanced the system by dividing it into compound components and applying architectural styles such as:
+
+Model-View-Controller (MVC)
+Layered architecture
+
+We also introduced principles of Service-Oriented Architecture (SOA) to improve modularity and interoperability.
+
+The system was fully implemented and tested using defined test cases. Results confirmed that the system works as expected and meets the project requirements.
+
+5. Teamwork and Contribution
+
+Work was divided between Ahmed and Mostafa across all sprints. Tasks included requirements analysis, design, implementation, and testing. Both members contributed to coding, reviewing, and documentation.
+
+The team collaborated using GitHub for version control and maintained consistent communication throughout the project.
+
+6. Design Rationale
+
+The system was designed with a focus on simplicity, scalability, and maintainability.
+
+Clean Architecture was used to separate logic into layers, making the system easier to modify and test.
+MVC and layered styles were applied to improve structure and reusability.
+SOA principles were introduced to allow components to work independently and communicate efficiently.
+
+These decisions ensure that the system can be extended in the future without major changes.
+
+7. Conclusion
+
+The project successfully progressed from requirements to a fully implemented system. By following structured architectural principles and maintaining good teamwork, the final system is well-organized, functional, and scalable.
