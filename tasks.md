@@ -1,9 +1,9 @@
 # Task Allocation
 
-## Member A 
+## Member Ahmed
 - Requirements & documentation
 - Infrastructure (Repository, Provider)
 
-## Member B
+## Member Mostafa
 - Domain model (Share, PriceData)  
 - Application logic (ShareService)  
