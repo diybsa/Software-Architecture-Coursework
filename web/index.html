@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Price Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .container {
+      background: white;
+      max-width: 800px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 8px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    canvas {
+      margin-top: 25px;
+      border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 8px;
+    }
+
+    .legend {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .legend span {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    .blue-box, .red-box {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .blue-box {
+      background: blue;
+    }
+
+    .red-box {
+      background: red;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Share Price Comparison</h1>
+
+    <input id="symbol1" placeholder="First Share (AAPL)">
+    <input id="symbol2" placeholder="Second Share (MSFT)">
+    <button onclick="loadChart()">Compare</button>
+
+    <div id="result"></div>
+
+    <canvas id="chart" width="700" height="350"></canvas>
+
+    <div class="legend">
+      <span><span class="blue-box"></span> First Share</span>
+      <span><span class="red-box"></span> Second Share</span>
+    </div>
+  </div>
+
+  <script>
+    function makeData(symbol) {
+      let base = 20;
+      let data = [];
+
+      for (let i = 0; i < symbol.length; i++) {
+        base += symbol.charCodeAt(i);
+      }
+
+      for (let i = 0; i < 6; i++) {
+        data.push((base % 40) + 20 + (i * 2) - (i % 2 ? 5 : 0));
+        base = Math.floor(base / 2) + 11;
+      }
+
+      return data;
+    }
+
+    function drawAxes(ctx) {
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 1;
+
+      // Y axis
+      ctx.beginPath();
+      ctx.moveTo(50, 20);
+      ctx.lineTo(50, 300);
+      ctx.lineTo(650, 300);
+      ctx.stroke();
+
+      // X axis labels
+      const labels = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6"];
+      ctx.fillStyle = "black";
+      ctx.font = "12px Arial";
+
+      for (let i = 0; i < labels.length; i++) {
+        let x = 70 + i * 95;
+        ctx.fillText(labels[i], x - 15, 320);
+      }
+
+      // Y axis labels
+      for (let y = 0; y <= 5; y++) {
+        let value = 20 + y * 10;
+        let yPos = 300 - y * 50;
+        ctx.fillText(value, 20, yPos + 5);
+
+        ctx.strokeStyle = "#e5e7eb";
+        ctx.beginPath();
+        ctx.moveTo(50, yPos);
+        ctx.lineTo(650, yPos);
+        ctx.stroke();
+      }
+    }
+
+    function drawLine(ctx, data, color) {
+      ctx.beginPath();
+
+      data.forEach((value, index) => {
+        let x = 70 + index * 95;
+        let y = 300 - (value - 20) * 5;
+
+        if (index === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Draw points
+      data.forEach((value, index) => {
+        let x = 70 + index * 95;
+        let y = 300 - (value - 20) * 5;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+      });
+    }
+
+    function loadChart() {
+      const s1 = document.getElementById("symbol1").value.trim().toUpperCase();
+      const s2 = document.getElementById("symbol2").value.trim().toUpperCase();
+      const result = document.getElementById("result");
+
+      if (!s1 || !s2) {
+        alert("Please enter both share symbols");
+        return;
+      }
+
+      const canvas = document.getElementById("chart");
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawAxes(ctx);
+
+      const data1 = makeData(s1);
+      const data2 = makeData(s2);
+
+      drawLine(ctx, data1, "blue");
+      drawLine(ctx, data2, "red");
+
+      result.textContent = "Comparing " + s1 + " vs " + s2;
+    }
+  </script>
+</body>
+</html>

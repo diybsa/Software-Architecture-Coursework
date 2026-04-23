@@ -181,3 +181,22 @@ The design ensures:
 * Clear separation between components
 
 All models and implementation are aligned, providing a cohesive and robust system design.
+# Sprint 3
+
+## Compound Components
+The architecture is divided into three compound components:
+- UI Component: the HTML webpage and JavaScript used for user interaction and graph display.
+- Business Component: the application logic and use cases.
+- Data Component: the repository and data provider for retrieving and storing share price data.
+
+## Domain Independent Styles
+The system applies several architectural styles:
+- MVC: the model is the share price data, the view is the webpage, and the controller is the JavaScript logic handling user input.
+- Layered Architecture: presentation, application, domain, and infrastructure are separated.
+- N-tier Architecture: the system is organised into UI, business logic, and data layers.
+
+## SOA Principles
+The system follows service-oriented principles by keeping data retrieval and business logic modular and separate. This supports reusability, maintainability, and future scalability.
+
+## Testing
+Test cases were carried out to confirm that the webpage loads, compares two shares, updates the graph, and handles empty input correctly.
