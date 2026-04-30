@@ -1,58 +1,145 @@
-Group Report
+ Group Report 
 1. Introduction
 
-This project was completed over three sprints to design and implement a software system using architectural principles. The aim was to move from requirements to a working system while applying good design practices such as modularity, scalability, and clean architecture.
+This project was carried out over three sprints to design and implement a software system using software architectural styles and design principles. The goal was to move systematically from requirements to a working system while applying key concepts such as components, connectors, modularity, and architectural structure.
+
+The project emphasised the use of architectural styles, which define how components interact via connectors and follow specific configuration rules and semantics . This ensured the system is scalable, maintainable, and well-structured.
 
 2. Sprint 1 – Requirements and Setup
 
-In Sprint 1, we identified the system requirements and defined the project scope. These included both functional and non-functional requirements to ensure the system meets user needs.
+During Sprint 1, we identified both functional and non-functional requirements, defining the system scope and expected behaviour.
 
-We also set up the development environment using GitHub, created branches, and organized tasks using a project management tool. A Code of Conduct was agreed to ensure effective teamwork.
+We also:
 
-An initial component diagram was created to represent the system structure, and basic architectural elements were implemented in Java using abstract classes and interfaces.
+Set up a development environment using GitHub
+Organised work using project management tools
+Established a Code of Conduct for effective collaboration
+
+From an architectural perspective:
+
+An initial UML component diagram was created to represent the system using components and connectors
+Components were defined with provided and required interfaces
+Basic architectural elements were implemented in Java using interfaces and abstract classes, reflecting the concept of component-based design
+
+This stage laid the foundation for a structured architecture where components communicate through clearly defined interfaces.
 
 3. Sprint 2 – Architecture Design
 
-In Sprint 2, we developed the system architecture from the requirements.
+In Sprint 2, we refined the system using formal architectural models:
 
-We created:
+Models Created
+Business Concept Model → captures domain concepts
+Use Case Diagram → shows user interactions
+System Interfaces → define operations between components
+Business Type Model → structures domain entities
 
-A Business Concept Model to understand the domain
-A Use Case Diagram to represent user interactions
-System Interfaces to define system operations
-A Business Type Model to structure key entities
+These models were integrated into a system architecture that describes:
 
-These were combined into an initial system architecture, showing how components interact.
+Components (functional units)
+Connectors (interaction mechanisms between components)
 
-We applied Clean Architecture to separate concerns and improve maintainability. The system was implemented based on this structure using well-defined components and interfaces.
+We applied Clean Architecture, which aligns with the layered architectural style, where:
 
+Each layer provides services to the layer above
+Dependencies are controlled and structured
+
+This separation of concerns improved:
+
+Maintainability
+Reusability
+Testability
 4. Sprint 3 – Implementation and Testing
 
-In Sprint 3, we enhanced the system by dividing it into compound components and applying architectural styles such as:
+In Sprint 3, the system was extended and implemented using more advanced architectural concepts from the slides.
+
+ Compound Components
+
+The system was structured into compound components, meaning:
+
+Each high-level component contains internal sub-components
+External interfaces delegate requests to internal components using delegation connectors
+
+This improves:
+
+Encapsulation
+Modularity
+Reusability
+ Architectural Styles Applied
+
+We applied multiple domain-independent architectural styles:
 
 Model-View-Controller (MVC)
-Layered architecture
+Model → manages data and domain logic
+View → handles user interface
+Controller → manages user interaction
+Layered Architecture
+System divided into hierarchical layers
+Each layer communicates via defined interfaces
+Service-Oriented Architecture (SOA)
+Components behave as services
+Communication is loosely coupled via connectors
+Improves interoperability and scalability
+ Connectors and Communication
+Components interact through connectors
+Both assembly connectors (between components) and delegation connectors (within compound components) were used
+Communication semantics such as synchronous interaction were considered using UML stereotypes
+ Testing
 
-We also introduced principles of Service-Oriented Architecture (SOA) to improve modularity and interoperability.
+The system was fully implemented and tested using defined test cases. Results confirmed:
 
-The system was fully implemented and tested using defined test cases. Results confirmed that the system works as expected and meets the project requirements.
-
+Correct functionality
+Proper interaction between components
+Compliance with requirements
 5. Teamwork and Contribution
 
-Work was divided between Ahmed and Mostafa across all sprints. Tasks included requirements analysis, design, implementation, and testing. Both members contributed to coding, reviewing, and documentation.
+The project work was shared between Ahmed and Mostafa across all sprints, including:
 
-The team collaborated using GitHub for version control and maintained consistent communication throughout the project.
+Requirements analysis
+Architectural design
+Implementation
+Testing
+
+Both members contributed to:
+
+Coding and component implementation
+Designing interfaces and connectors
+Reviewing and documentation
+
+Collaboration was managed through GitHub, ensuring version control and continuous integration of work.
 
 6. Design Rationale
 
-The system was designed with a focus on simplicity, scalability, and maintainability.
+The system design was guided by architectural principles from the course:
 
-Clean Architecture was used to separate logic into layers, making the system easier to modify and test.
-MVC and layered styles were applied to improve structure and reusability.
-SOA principles were introduced to allow components to work independently and communicate efficiently.
+ Key Decisions
+Use of architectural styles to structure the system
+Use of components and connectors as core building blocks
+Adoption of compound components for modular organisation
+ Why These Choices?
+Layered architecture → clear separation of concerns
+MVC → separation of UI, logic, and control
+SOA principles → independent, loosely coupled services
 
-These decisions ensure that the system can be extended in the future without major changes.
+These decisions align with the idea that architectural styles provide:
 
+Reusable design patterns
+Well-defined interaction semantics
+Scalable system structures
 7. Conclusion
 
-The project successfully progressed from requirements to a fully implemented system. By following structured architectural principles and maintaining good teamwork, the final system is well-organized, functional, and scalable.
+The project successfully progressed from requirements to a fully implemented system using structured software architecture principles.
+
+By applying:
+
+Architectural styles
+Component-based design
+Compound components and connectors
+
+the final system is:
+
+Well-organised
+Modular
+Scalable
+Maintainable
+
+The use of these concepts ensured that the system can be extended in the future with minimal changes while maintaining a clear and robust architecture.
